@@ -4,7 +4,7 @@ package br.com.senac.projetocrud.modelo;
  * Nome da classe (FQDN)
  * br.com.senac.projetocrud.modelo.Pessoa
  * */
-public class Pessoa {
+public abstract class Pessoa {
 
 	private long id;
 	private String nome;

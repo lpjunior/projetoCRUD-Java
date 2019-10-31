@@ -3,27 +3,29 @@ package br.com.senac.projetocrud.modelo;
 public class Aluno extends Pessoa {
 
 	private int matricula;
-	
-	private String disciplina;
-	private double nota01;
-	private double nota02;
-	
+
+	private Disciplina disciplina;
+
 	public Aluno() {
 		super();
 	}
-	
-	public Aluno(long id, String nome, String email, int matricula, String disciplina, double nota01, double nota02) {
-		// dentro da herança, temos a palavra "super" para referenciar os membros da classe pai(superclasse)
+
+	public Aluno(long id, String nome, String email, int matricula) {
+		// dentro da herança, temos a palavra "super" para referenciar os membros da
+		// classe pai(superclasse)
 		super(id, nome, email); // estou chamando o construtor da classe pai
 		this.matricula = matricula;
-		this.disciplina = disciplina;
-		this.nota01 = nota01;
-		this.nota02 = nota02;
 	}
-	
+
 	@Override
 	public String toString() {
-		return getId() + ", " + getNome() + ", " + getEmail() + ", " + matricula + ", " + disciplina + ", " + nota01 + ", " + nota02;
+		return "ID: " + getId() 
+			   + "\nNome: " + getNome()
+			   + "\nEmail: " + getEmail()
+			   + "\nMatricula: " + matricula
+			   + "\nDisciplina: " + disciplina.getDisciplina()
+			   + "\n1ª nota: " + disciplina.getNota01()
+			   + "\n2ª nota: " + disciplina.getNota02();
 	}
 
 	public int getMatricula() {
@@ -34,31 +36,11 @@ public class Aluno extends Pessoa {
 		this.matricula = matricula;
 	}
 
-	public String getDisciplina() {
+	public Disciplina getDisciplina() {
 		return disciplina;
 	}
 
-	public void setDisciplina(String disciplina) {
+	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
-
-	public double getNota01() {
-		return nota01;
-	}
-
-	public void setNota01(double nota01) {
-		this.nota01 = nota01;
-	}
-
-	public double getNota02() {
-		return nota02;
-	}
-
-	public void setNota02(double nota02) {
-		this.nota02 = nota02;
-	}
 }
-
-
-
-
