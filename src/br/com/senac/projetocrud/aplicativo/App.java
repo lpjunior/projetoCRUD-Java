@@ -1,21 +1,31 @@
 package br.com.senac.projetocrud.aplicativo;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import br.com.senac.projetocrud.modelo.Aluno;
 import br.com.senac.projetocrud.modelo.Disciplina;
+import br.com.senac.projetocrud.persistencia.AlunoDAO;
 
 public class App {
 	public static void main(String[] args) {
 
 		Aluno aluno01 = new Aluno();
 		Disciplina disciplina01 = new Disciplina();
-
+		AlunoDAO dao = new AlunoDAO();
+		
 		// Atribuição dos dados do aluno01
 		aluno01.setId(1);
 		aluno01.setNome("Joãozinho");
 		aluno01.setEmail("joaozinho@senac.com.br");
 		aluno01.setMatricula(1234);
+		
+		try {
+			dao.gravar(aluno01);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		// Atribuição dos dados da disciplina01
 		disciplina01.setDisciplina("Linguagem de Programação");
