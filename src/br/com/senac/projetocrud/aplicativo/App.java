@@ -21,11 +21,13 @@ public class App {
 		aluno01.setEmail("joaozinho@senac.com.br");
 		aluno01.setMatricula(1234);
 		
-		try {
-			dao.gravar(aluno01);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			dao.gravar(aluno01);
+//			System.out.println("Dados gravados com sucesso!!!");
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			System.err.println("==> Ocorreu um erro ao executar o insert <==");
+//		}
 		
 		// Atribuição dos dados da disciplina01
 		disciplina01.setDisciplina("Linguagem de Programação");
@@ -52,10 +54,30 @@ public class App {
 		aluno02.getDisciplina().setNota02(6.4);
 		JOptionPane.showMessageDialog(null, aluno02);
 		
+//		try {
+//			dao.gravar(aluno02);
+//			System.out.println("Dados gravados com sucesso!!!");
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			System.err.println("==> Ocorreu um erro ao executar o insert <==");
+//		}
+		
 		/******************************************************/
 		Aluno aluno03 = new Aluno(78, "Paulo", "paulo@gmail.com", 852);
 		aluno03.setDisciplina(new Disciplina("PHP com banco de dados", 10., 8.7));
 		
 		JOptionPane.showMessageDialog(null, aluno03);
+		
+		/******************************************************/
+		
+		try {
+			for(Aluno a : dao.listar()) {
+				System.out.println(a);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
