@@ -70,14 +70,33 @@ public class App {
 		
 		/******************************************************/
 		
+//		try {
+//			//foreach - para cada recorrencia do array
+//			for(Aluno a : dao.listar()) {
+//				System.out.println(
+//					"Nome: " + a.getNome()
+//					+ "\nEmail: " + a.getEmail()
+//					+ "\nMatricula: " + a.getMatricula()
+//				);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+		
 		try {
-			for(Aluno a : dao.listar()) {
-				System.out.println(a);
+			Aluno aluno = dao.listar(1);
+			
+			if(aluno != null) {
+				System.out.println(
+					"Nome: " + aluno.getNome()
+					+ "\nEmail: " + aluno.getEmail()
+					+ "\nMatricula: " + aluno.getMatricula()
+				);
+			} else {
+				System.out.println("Aluno não encontrado");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }

@@ -73,8 +73,33 @@ public class AlunoDAO extends DAO {
 				rs.close();
 		}
 	}
-	public void localizarPorId(int id) {
+	public Aluno listar(long id) throws SQLException {
 		abreConexao();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+			pstmt = conn.prepareStatement("select * from tb_aluno where id = ?");
+			pstmt.setLong(1, id);
+			
+			// pstmt.executeQuery() - executar a query e trazer o resultado de consulta
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return criaObjAluno(rs);
+			}
+			
+			return null;
+		} finally {
+			if(conn != null)
+				conn.close();
+			if(pstmt != null)
+				pstmt.close();
+			if(rs != null)
+				rs.close();
+		}
 	}
 	public void localizarPorNome(String nome) {
 		abreConexao();
