@@ -83,17 +83,29 @@ public class App {
 //			e.printStackTrace();
 //		}
 		
+//		try {
+//			Aluno aluno = dao.listar(1);
+//			
+//			if(aluno != null) {
+//				System.out.println(
+//					"Nome: " + aluno.getNome()
+//					+ "\nEmail: " + aluno.getEmail()
+//					+ "\nMatricula: " + aluno.getMatricula()
+//				);
+//			} else {
+//				System.out.println("Aluno não encontrado");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+		
 		try {
-			Aluno aluno = dao.listar(1);
-			
-			if(aluno != null) {
+			for (Aluno aluno : dao.listar("Sandro")) {
 				System.out.println(
 					"Nome: " + aluno.getNome()
 					+ "\nEmail: " + aluno.getEmail()
 					+ "\nMatricula: " + aluno.getMatricula()
-				);
-			} else {
-				System.out.println("Aluno não encontrado");
+					);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -101,14 +101,85 @@ public class AlunoDAO extends DAO {
 				rs.close();
 		}
 	}
-	public void localizarPorNome(String nome) {
+	
+	public List<Aluno> listar(String nome) throws SQLException {
 		abreConexao();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+			pstmt = conn.prepareStatement("select * from tb_aluno where nome like ?");
+			pstmt.setString(1, '%' + nome + '%');
+			
+			// pstmt.executeQuery() - executar a query e trazer o resultado de consulta
+			rs = pstmt.executeQuery();
+			
+			List<Aluno> listaDeAlunos = new ArrayList<Aluno>();
+			
+			while(rs.next()) {
+				listaDeAlunos.add(criaObjAluno(rs));
+			}
+			
+			return listaDeAlunos;
+		} finally {
+			if(conn != null)
+				conn.close();
+			if(pstmt != null)
+				pstmt.close();
+			if(rs != null)
+				rs.close();
+		}
 	}
-	public void atualizar(Aluno a) {
+	
+	public void atualizar(Aluno a) throws SQLException {
 		abreConexao();
+		
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("update tb_aluno set"
+											+ "nome = ? "
+											+ "email = ? "
+											+ "where id = ?");
+			
+			pstmt.setString(1, a.getNome());
+			pstmt.setString(2, a.getEmail());
+			pstmt.setLong(3, a.getId());
+			
+			int flag = pstmt.executeUpdate();
+			
+			if(flag == 0)
+				throw new SQLException("Erro ao atualizar os dados");
+			
+		} finally {
+			if(conn != null)
+				conn.close();
+			if(pstmt != null)
+				pstmt.close();
+		}
 	}
-	public void excluir(int id) {
+	
+	public void excluir(long id) throws SQLException {
 		abreConexao();
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement("delete from tb_aluno where id = ?");
+			pstmt.setLong(1, id);
+			
+			int flag = pstmt.executeUpdate();
+			
+			if(flag == 0)
+				throw new SQLException("Erro ao excluir o aluno");
+			
+		} finally {
+			if(conn != null)
+				conn.close();
+			if(pstmt != null)
+				pstmt.close();
+		}
 	}
 	
 	private void abreConexao() {
